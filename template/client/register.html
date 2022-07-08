@@ -1,0 +1,54 @@
+{% extends 'Base_Home.html'%}
+{% load static %}
+{% block content %}
+
+<main>
+    <section id="hero" class="login">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8">
+                    <div id="login">
+                        <div class="text-center"><img src="{% static 'img/logo_sticky.png' %}" alt="Image"
+                                data-retina="true">{% include 'client/_alerts.html'%}
+                            </div>
+                        <form action="{% url 'register' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="Username">Username</label>
+                                <input type="text" name="username" class=" form-control" required
+                                    placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="Firstname">First name</label>
+                                <input type="text" name="first_name" class=" form-control" required
+                                    placeholder="First name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">last name</label>
+                                <input type="text" name="last_name" class=" form-control" required
+                                    placeholder="lastname">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class=" form-control" required placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="password" class=" form-control" required id="password"
+                                    placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm password</label>
+                                <input type="password" name="con_password" class=" form-control" required
+                                    id="con_password" placeholder="Confirm password">
+                            </div>
+                            <button value="submit" class="btn_full">Create an account</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main><!-- End main -->
+
+{% endblock %}

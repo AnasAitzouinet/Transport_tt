@@ -1,0 +1,393 @@
+{% extends 'Base_Home.html' %}
+{% load static%}
+
+{% block content %}
+
+<div id="search_container_2">
+    <div id="search_2">
+        <ul class="nav nav-tabs">
+            <li><a href="#tours" data-toggle="tab" class="active show" id="tab_bt_1"><span>Tours</span></a></li>
+            <li><a href="#hotels" data-toggle="tab" id="tab_bt_2"><span>Hotels</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade active show" id="tours">
+                <form>
+                    <div class="row no-gutters custom-search-input-2">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Where..." id="autocomplete">
+                                <i class="icon_pin_alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <input class="form-control date-pick" type="text" name="dates" placeholder="When..">
+                                <i class="icon_calendar"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="panel-dropdown">
+                                <a href="#">Guests <span class="qtyTotal tours">1</span></a>
+                                <div class="panel-dropdown-content">
+                                    <!-- Quantity Buttons -->
+                                    <div class="qtyButtons tours">
+                                        <label>Adults</label>
+                                        <input type="text" name="qtyInput_tours" value="1">
+                                    </div>
+                                    <div class="qtyButtons tours">
+                                        <label>Childrens</label>
+                                        <input type="text" name="qtyInput_tours" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="submit" class="btn_search" value="Search">
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </form>
+            </div>
+            <!-- End tab -->
+            <div class="tab-pane fade" id="hotels">
+                <form>
+                    <div class="row no-gutters custom-search-input-2">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Hotel Name, City...">
+                                <i class="icon_pin_alt"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <input class="form-control date-pick" type="text" name="dates" placeholder="When..">
+                                <i class="icon_calendar"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="panel-dropdown">
+                                <a href="#">Guests <span class="qtyTotal hotels">1</span></a>
+                                <div class="panel-dropdown-content">
+                                    <!-- Quantity Buttons -->
+                                    <div class="qtyButtons hotels">
+                                        <label>Adults</label>
+                                        <input type="text" name="qtyInput_hotels" value="1">
+                                    </div>
+                                    <div class="qtyButtons hotels">
+                                        <label>Childrens</label>
+                                        <input type="text" name="qtyInput_hotels" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="submit" class="btn_search" value="Search">
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </form>
+            </div>
+            <!-- End tab -->
+
+            <!-- End tab -->
+        </div>
+    </div>
+
+
+    <!-- End search_container_2 -->
+</div>
+<!-- End search_container -->
+<main>
+    <div class="white_bg">
+        <div class="container margin_60">
+            <div class="row small-gutters categories_grid">
+                <div class="col-sm-12 col-md-6">
+                    <a href="all_tours_list.html">
+                        <img src="{% static '/img/ho.jpg'  %}" alt="" class="img-fluid">
+                        <div class="wrapper">
+                            <h2>Special Offers</h2>
+                            <p>150 Locations</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <div class="row small-gutters mt-md-0 mt-sm-2">
+                        <div class="col-sm-6">
+                            <a href="all_tours_list.html">
+                                <img src="{% static '/img/marrakech-to-ourika-day-tour.png'  %}" alt=""
+                                    class="img-fluid">
+                                <div class="wrapper">
+                                    <h2>Tours</h2>
+                                    <p>800 Locations</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="all_hotels_list.html">
+                                <img src="{% static '/img/exterior.jpg'  %}" alt="" class="img-fluid">
+                                <div class="wrapper">
+                                    <h2>Hotels</h2>
+                                    <p>650 Locations</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-sm-12 mt-sm-2">
+                            <a href="all_restaurants_list.html">
+                                <img src="{% static '/img/bar1.jpg'  %}" alt="" class="img-fluid">
+                                <div class="wrapper">
+                                    <h2>Restaurants</h2>
+                                    <p>1132 Locations</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/categories_grid-->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /white_bg -->
+
+    <div class="container margin_60">
+
+        <div class="main_title">
+            <h2>Morroco <span>Top</span> Tours</h2>
+            <p>Meilleur excursions à la journée à Maroc, visites guidées.</p>
+        </div>
+        <div class="owl-carousel owl-theme list_carousel add_bottom_30">
+
+            {% if Listings %}
+            {% for listing in Listings %}
+            <div class="item">
+                <div class="tour_container">
+                    <div class="ribbon_3 popular"><span>Popular</span></div>
+                    <div class="img_container">
+                        <a href="single_tour.html">
+                            <img src="{{ listing.photo_main.url }}" width="800" height="533" class="img-fluid"
+                                alt="image">
+                            <div class="short_info">
+                                <span class="price"><sup>$</sup>{{listing.price}}</span>
+
+                            </div>
+                        </a>
+                    </div>
+                    <div class="tour_title">
+                        <h3><strong>{{listing.title}}</strong> tour</h3>
+                        <div class="rating">
+                            <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i
+                                class="icon-smile voted"></i><i class="icon-smile voted"></i><i
+                                class="icon-smile"></i><small>(75)</small>
+                        </div>
+                        <!-- end rating -->
+                        <div class="wishlist">
+                            <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span
+                                    class="tooltip-content-flip"><span class="tooltip-back">Add to
+                                        wishlist</span></span></a>
+                        </div>
+                        <!-- End wish list-->
+                    </div>
+                </div>
+                <!-- End box tour -->
+            </div>
+
+            {% endfor%}
+            {% else %}
+            <p> No Tours Available
+
+            </p>
+            {% endif %}
+
+        </div>
+        <!-- /carousel -->
+
+        <p class="text-center add_bottom_30">
+            <a href="" class="btn_1">View all Tours</a>
+        </p>
+
+        <hr class="mt-5 mb-5">
+
+        <div class="main_title">
+            <h2>Morroco <span>Top</span> Hotels</h2>
+            <p></p>
+        </div>
+
+        <div class="owl-carousel owl-theme list_carousel add_bottom_30">
+
+
+            {% if Hotel %}
+            {% for hotel in Hotel %}
+
+            <div class="item">
+                <div class="hotel_container">
+                    <div class="ribbon_3 popular"><span>Popular</span></div>
+                    <div class="img_container">
+                        <a href="single_hotel.html">
+                            <img src="{{ hotel.photo_main.url }}" width="800" height="533" class="img-fluid" alt="image">
+                            <div class="score"><span>{{ hotel.review }}</span>Good</div>
+                            <div class="short_info hotel">
+                                <span class="price"><sup>$</sup>{{hotel.price}}</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="hotel_title">
+                        <h3><strong>{{hotel.title}}</strong> Hotel</h3>
+                        <div class="rating">
+                            <i class="icon-star voted"></i><i class="icon-star voted"></i><i
+                                class="icon-star voted"></i><i class="icon-star voted"></i><i
+                                class="icon-star-empty"></i>
+                        </div>
+                        <!-- end rating -->
+                        <div class="wishlist">
+                            <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span
+                                        class="tooltip-back">Add to wishlist</span></span></a>
+                        </div>
+                        <!-- End wish list-->
+                    </div>
+                </div>
+                <!-- End box -->
+            </div>
+            {% endfor%}
+            {% else %}
+            <p> THERE IS NO HOTELS </p>
+            {% endif %}
+
+
+            <!-- End box -->
+        </div>
+        <!-- /item -->
+
+        <!-- /item -->
+    </div>
+    <!-- /carousel -->
+
+    <p class="text-center nopadding">
+        <a href="" class="btn_1">View all Hotels</a>
+    </p>
+
+    </div>
+    <!-- End container -->
+
+    <div class="white_bg">
+        <div class="container margin_60">
+            <div class="main_title">
+                <h2>Plan <span>Your Tour</span> Easly</h2>
+                <p>
+                    Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.
+                </p>
+            </div>
+            <div class="row feature_home_2">
+                <div class="col-md-4 text-center">
+                    <img src="{% static '/img/adventure_icon_1.svg'  %}" alt="" width="75" height="75">
+                    <h3>Itineraries studied in detail</h3>
+                    <p>Suscipit invenire petentium per in. Ne magna assueverit vel. Vix movet perfecto facilisis in,
+                        ius ad maiorum corrumpit, his esse docendi in.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="{% static '/img/adventure_icon_2.svg'  %}" alt="" width="75" height="75">
+                    <h3>Room and food included</h3>
+                    <p> Cum accusam voluptatibus at, et eum fuisset sententiae. Postulant tractatos ius an, in vis
+                        fabulas percipitur, est audiam phaedrum electram ex.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="{% static '/img/adventure_icon_3.svg'  %}" alt="" width="75" height="75">
+                    <h3>Everything organized</h3>
+                    <p>Integre vivendo percipitur eam in, graece suavitate cu vel. Per inani persius accumsan no. An
+                        case duis option est, pro ad fastidii contentiones.</p>
+                </div>
+            </div>
+
+            <div class="banner_2">
+                <div class="wrapper d-flex align-items-center opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.3)"
+                    style="background-color: rgba(0, 0, 0, 0.3);">
+                    <div>
+                        <h3>Your Perfect<br>Tour Experience</h3>
+                        <p>Activities and accommodations</p>
+                        <a href="all_tours_list.html" class="btn_1">Read more</a>
+                    </div>
+                </div>
+                <!-- /wrapper -->
+            </div>
+            <!-- /banner_2 -->
+
+        </div>
+        <!-- End container -->
+    </div>
+    <!-- End white_bg -->
+
+    <div class="container margin_60">
+        <div class="main_title">
+            <h2>Lates <span>Blog</span> News</h2>
+            <p>Quisque at tortor a libero posuere laoreet vitae sed arcu. Curabitur consequat.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <a class="box_news" href="blog.html">
+                    <figure><img src="{% static '/img/news_home_1.jpg'  %}" alt="">
+                        <figcaption><strong>28</strong>Dec</figcaption>
+                    </figure>
+                    <ul>
+                        <li>Mark Twain</li>
+                        <li>20.11.2017</li>
+                    </ul>
+                    <h4>Pri oportere scribentur eu</h4>
+                    <p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse
+                        ullum vidisse....</p>
+                </a>
+            </div>
+            <!-- /box_news -->
+            <div class="col-lg-6">
+                <a class="box_news" href="blog.html">
+                    <figure><img src="{% static '/img/news_home_2.jpg'  %}" alt="">
+                        <figcaption><strong>28</strong>Dec</figcaption>
+                    </figure>
+                    <ul>
+                        <li>Jhon Doe</li>
+                        <li>20.11.2017</li>
+                    </ul>
+                    <h4>Duo eius postea suscipit ad</h4>
+                    <p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse
+                        ullum vidisse....</p>
+                </a>
+            </div>
+            <!-- /box_news -->
+            <div class="col-lg-6">
+                <a class="box_news" href="blog.html">
+                    <figure><img src="{% static '/img/news_home_3.jpg'  %}" alt="">
+                        <figcaption><strong>28</strong>Dec</figcaption>
+                    </figure>
+                    <ul>
+                        <li>Luca Robinson</li>
+                        <li>20.11.2017</li>
+                    </ul>
+                    <h4>Elitr mandamus cu has</h4>
+                    <p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse
+                        ullum vidisse....</p>
+                </a>
+            </div>
+            <!-- /box_news -->
+            <div class="col-lg-6">
+                <a class="box_news" href="blog.html">
+                    <figure><img src="{% static '/img/news_home_4.jpg'  %}" alt="">
+                        <figcaption><strong>28</strong>Dec</figcaption>
+                    </figure>
+                    <ul>
+                        <li>Paula Rodrigez</li>
+                        <li>20.11.2017</li>
+                    </ul>
+                    <h4>Id est adhuc ignota delenit</h4>
+                    <p>Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse
+                        ullum vidisse....</p>
+                </a>
+            </div>
+            <!-- /box_news -->
+        </div>
+        <!-- /row -->
+        <p class="btn_home_align"><a href="blog.html" class="btn_1 rounded">View all news</a></p>
+    </div>
+    <!-- End container -->
+</main>
+
+{% endblock %}

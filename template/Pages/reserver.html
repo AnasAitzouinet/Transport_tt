@@ -1,0 +1,244 @@
+{% extends 'Base_Home.html'%}
+{% load static %}
+
+{% block content %}
+<section id="hero_2">
+    <div class="intro_title">
+        <h1>Make a Reservation</h1>
+        <div class="bs-wizard row">
+            <a href="confirmation.html" class="bs-wizard-dot"></a>
+        </div>
+
+    </div>
+    <!-- End bs-wizard -->
+    </div>
+    <!-- End intro-title -->
+</section>
+<!-- End Section hero_2 -->
+
+<main>
+    <div id="position">
+        <div class="container">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a>
+                </li>
+
+                <li>Make a Reservation</li>
+            </ul>
+        </div>
+    </div>
+    <!-- End position -->
+    <div class="container margin_60">
+        <div class="row">
+            <div class="col-lg-8" id="single_tour_desc">
+                <form action="{% url 'reserver' %}" method="post">
+                    {% csrf_token %}
+                    <h1 class="inner">Make a Reservation</h1>
+                    {% if user.is_authenticated%}{% else %} <h3 style="color:blue ;">Note : It's Better to Log in Before Reserve !! </h3>{% endif %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><i class="icon-calendar-7"></i> Check in</label>
+                                <input class="form-control required" name="check_in" type="date">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><i class="icon-calendar-7"></i> Check out</label>
+                                <input class="form-control required" data-date-format="M d, D" type="date"
+                                    name="check_out" id="checkout">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Adults</label>
+                                <div class="numbers-row">
+                                    <input type="text" value="1" id="adults_hotel" class="qty2 form-control required"
+                                        name="adults">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Children</label>
+                                <div class="numbers-row">
+                                    <input type="text" value="0" id="children_hotels" class="qty2 form-control required"
+                                        name="kids">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input class="form-control required" name="first_name"   id="first_name" type="text" {% if user.is_authenticated %} value="{{ user.first_name}}"  {% endif %}>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last name</label>
+                                <input class="form-control required" name="last_name" id="last_name"
+                                    type="text" {% if user.is_authenticated %} value="{{ user.last_name}}"  {% endif %}>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="position:relative">
+                        <label>Email</label>
+                        <input class="form-control required" type="email" name="email" id="email_hotel_booking" {% if user.is_authenticated %} value="{{ user.email}}"  {% endif %}>
+                    </div>
+                    <div class="form-group" style="position:relative">
+                        <label>Telephone</label>
+                        <input class="form-control required" type="text" name="phone" id="phone_hotel_booking">
+                    </div>
+                    <div class="form-group" style="position:relative">
+                        <label>Street line 1</label>
+                        <input class="form-control required" type="text" name="streetline_1" id="phone_hotel_booking">
+                    </div>
+                    <div class="form-group" style="position:relative">
+                        <label>Street line 2</label>
+                        <input class="form-control required" type="text" name="streetline_2" id="phone_hotel_booking">
+                    </div>
+                    <div class="form-group" style="position:relative">
+                        <label>City</label>
+                        <input class="form-control required" type="text" name="city" id="phone_hotel_booking">
+                    </div>
+                    <div class="form-group" style="position:relative">
+                        <label>State</label>
+                        <input class="form-control required" type="text" name="state" id="phone_hotel_booking">
+                    </div>
+                    <div class="form-group" style="position:relative">
+                        <label>Code Postal</label>
+                        <input class="form-control required" type="text" name="zip_code" id="phone_hotel_booking">
+                    </div>
+                    <div class="form-group" style="position:relative">
+                        <label>Details</label>
+                        <textarea class="form-control required" rows="4" cols="50" name="details"
+                            id="details"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Excursion :</label>
+                                <select class="form-control" name="excursion" id="Excursion">
+                                    <option value="" selected>Select your Excursion</option>
+                                    <option value="Marrakech">Marrakech</option>
+                                    <option value="Ourika">Ourika</option>
+                                    <option value="Agadir">Agadir</option>
+                                    <option value="Asia">Asia</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Car :</label>
+                                <select class="form-control" name="cars" id="Excursion">
+                                   
+                                    <option value="" selected>Select your Car</option>
+                                    <option value="Mercedes: 02 Pax">Mercedes</option>
+                                    <option value="Viano: 04 Pax">Viano: 04 Pax</option>
+                                    <option value="H1 : 06 Pax">Agadir</option>
+                                    <option value="4*4 : 04Pax">4*4 : 04Pax</option>
+                                    
+                                </select>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button type="submit" value="submit" class="btn_full">Reserve
+                        now</button>
+                </form>
+            </div>
+
+            <!--End step -->
+            <aside class="col-lg-4">
+                <div class="box_style_1 expose" style="z-index: 4;">
+                    <h3 class="inner">- Payment -</h3>
+                    <div class="form-group">
+                        <label>Name on card</label>
+                        <input type="text" class="form-control" id="name_card_bookign" name="name_card_bookign">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-50">
+                            <div class="form-group">
+                                <label>Card number</label>
+                                <input type="text" id="card_number" name="card_number" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <img src="{% static '/img/cards.png'%}" width="160" height="43" alt="Cards" class="cards">
+                        </div>
+
+                        <div class="col-ms-6">
+                            <label>Expiration date</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" id="expire_month" name="expire_month" class="form-control"
+                                            placeholder="MM">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" id="expire_year" name="expire_year" class="form-control"
+                                            placeholder="Year">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-ms-10">
+                            <div class="form-group">
+                                <label>Security code</label>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" id="ccv" name="ccv" class="form-control"
+                                                placeholder="CCV">
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <img src="{% static '/img/icon_ccv.gif'%}" width="50" height="29"
+                                            alt="ccv"><small>Last
+                                            3
+                                            digits</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End row -->
+
+                    <hr>
+
+                    <h4>Or checkout with Paypal</h4>
+                    <p>
+                        Buy So Fast With Paypal
+                    </p>
+                    <p>
+                        <img src="{% static '/img/paypal_bt.png'%}" alt="Image">
+                    </p>
+                </div>
+        </div>
+        </aside>
+    </div>
+</main>
+<script>
+    $(document).ready(function() {
+        // messages timeout for 10 sec 
+        setTimeout(function() {
+            $('.message').fadeOut('slow');
+        }, 3000); // <-- time in milliseconds, 1000 =  1 sec
+
+        // delete message
+        $('.del-msg').live('click',function(){
+            $('.del-msg').parent().attr('style', 'display:none;');
+        })
+    });
+</script>
+{% endblock %}

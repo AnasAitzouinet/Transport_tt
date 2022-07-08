@@ -1,0 +1,295 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+        content="Citytours - Premium site template for city tours agencies, transfers and tickets.">
+    <meta name="author" content="Ansonika">
+    <title>CITY TOURS - City tours and travel site template by Ansonika</title>
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="{% static '/img/favicon.ico'  %}" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon"
+        href="{% static '/img/apple-touch-icon-57x57-precomposed.png'  %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72"
+        href="{% static '/img/apple-touch-icon-72x72-precomposed.png'  %}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+        href="{% static '/img/apple-touch-icon-114x114-precomposed.png'%}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+        href="{% static '/img/apple-touch-icon-144x144-precomposed.png'%}">
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand|Montserrat:300,400,700" rel="stylesheet">
+
+    <!-- COMMON CSS -->
+    <link type="text/css" href="{% static '/css/bootstrap.min.css'  %}" rel="stylesheet">
+    <link type="text/css" href="{% static '/css/style.css'  %}" rel="stylesheet">
+    <link type="text/css" href="{% static '/css/vendors.css'  %}" rel="stylesheet">
+
+    <!-- CUSTOM CSS -->
+    <link type="text/css" href="{% static '/css/custom.css'  %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="preloader">
+        <div class="sk-spinner sk-spinner-wave">
+            <div class="sk-rect1"></div>
+            <div class="sk-rect2"></div>
+            <div class="sk-rect3"></div>
+            <div class="sk-rect4"></div>
+            <div class="sk-rect5"></div>
+        </div>
+    </div>
+    <!-- End Preload -->
+
+    <div class="layer"></div>
+    <!-- Mobile menu overlay mask -->
+
+    <!-- Header================================================== -->
+    <header>
+        <div id="top_line">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6"><i class="icon-phone"></i><strong>0045 043204434</strong></div>
+                    <div class="col-6">
+                        {% if user.is_authenticated %}
+                        <ul id="top_links">
+                            <li><a href="{% url 'dashboard'%}" >Welcome {{user.username}} | (Dashboard)</a></li>
+                            <li><a href="javascript:{document.getElementById('logout').submit()}">
+                                <i class="fas fa-sign-out-alt"></i>Logout</li></a>
+                                <form action="{% url 'logout'%}" method="post" id="logout">
+                                    {%csrf_token%}
+                                    <input type="hidden">
+                                </form>
+                        </ul>
+                        {% else %}
+                        <ul id="top_links">
+                            <li><a href="{% url 'login'%}" >Sign in</a></li>
+                            <li><a href="{% url 'register'%}">Register</a></li>
+                            <li><a href="" id="wishlist_link">Wishlist</a></li>
+                        </ul>
+                        {% endif%}
+                    </div>
+                </div><!-- End row -->
+            </div><!-- End container-->
+        </div><!-- End top line-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
+                    <div id="logo_home">
+                        <h1><a href="{% url 'home'%}" title="City tours travel template">City Tours travel template</a>
+                        </h1>
+                    </div>
+                </div>
+                <nav class="col-9">
+                    <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu
+                            mobile</span></a>
+                    <div class="main-menu">
+                        <div id="header_menu">
+                            <img src="{% static '/img/logo_sticky.png'  %}" width="160" height="34"
+                                alt="City tours" data-retina="true">
+                        </div>
+                        <a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
+                        <ul>
+                            <li class="submenu">
+                                <a href="{% url 'home'%}" class="show-submenu">Home</a>
+                            </li>
+                            <li class="submenu">
+                                <a href="{% url 'reserver'%}" class="show-submenu">Reserve</a>
+                            </li>
+                            <li class="submenu">
+                                <a href="" class="show-submenu">Tours </i></a>
+                            </li>
+                            </li>
+                            <li class="submenu">
+                                <a href="{% url 'all_hotels' %}" class="show-submenu">Hotels </a>
+                            </li>
+
+
+                            <li class="megamenu submenu">
+                                <a href="" class="show-submenu-mega">About us</a>
+
+                            </li>
+                        </ul>
+                    </div><!-- End main-menu -->
+                    <ul id="top_tools">
+                        <li>
+                            <a href="javascript:void(0);" class="search-overlay-menu-btn"><i
+                                    class="icon_search"></i></a>
+                        </li>
+                        <li>
+                            <div class="dropdown dropdown-cart">
+                                <a href="#" data-toggle="dropdown" class="cart_bt"><i
+                                        class="icon_bag_alt"></i><strong>3</strong></a>
+                                <ul class="dropdown-menu" id="cart_items">
+                                    <li>
+                                        <div class="image"><img src="{% static '/img/thumb_cart_1.jpg'  %}"
+                                                alt="image"></div>
+                                        <strong><a href="#">Louvre museum</a>1x $36.00 </strong>
+                                        <a href="#" class="action"><i class="icon-trash"></i></a>
+                                    </li>
+                                    <li>
+                                        <div class="image"><img src="{% static '/img/thumb_cart_2.jpg'  %}"
+                                                alt="image"></div>
+                                        <strong><a href="#">Versailles tour</a>2x $36.00 </strong>
+                                        <a href="#" class="action"><i class="icon-trash"></i></a>
+                                    </li>
+                                    <li>
+                                        <div class="image"><img src="{% static '/img/thumb_cart_3.jpg'  %}"
+                                                alt="image"></div>
+                                        <strong><a href="#">Versailles tour</a>1x $36.00 </strong>
+                                        <a href="#" class="action"><i class="icon-trash"></i></a>
+                                    </li>
+                                    <li>
+                                        <div>Total: <span>$120.00</span></div>
+                                        <a href="cart.html" class="button_drop">Go to cart</a>
+                                        <a href="payment.html" class="button_drop outline">Check out</a>
+                                    </li>
+                                </ul>
+                            </div><!-- End dropdown-cart-->
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div><!-- container -->
+    </header><!-- End Header -->
+    
+
+        {% block content %}
+
+        {% endblock %}
+
+    
+
+    
+    <!-- End main -->
+
+    <footer class="revealed">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>Need help?</h3>
+                    <a href="tel://004542344599" id="phone">+45 423 445 99</a>
+                    <a href="mailto:help@citytours.com" id="email_footer">help@citytours.com</a>
+                </div>
+                <div class="col-md-3">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">Terms and condition</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h3>Discover</h3>
+                    <ul>
+                        <li><a href="#">Community blog</a></li>
+                        <li><a href="#">Tour guide</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h3>Settings</h3>
+                    <div class="styled-select">
+                        <select name="lang" id="lang">
+                            <option value="English" selected>English</option>
+                            <option value="French">French</option>
+                            <option value="Spanish">Spanish</option>
+                            <option value="Russian">Russian</option>
+                        </select>
+                    </div>
+                    <div class="styled-select">
+                        <select name="currency" id="currency">
+                            <option value="USD" selected>USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="GBP">GBP</option>
+                            <option value="RUB">RUB</option>
+                        </select>
+                    </div>
+                </div>
+            </div><!-- End row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="social_footer">
+                        <ul>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-google"></i></a></li>
+                            <li><a href="#"><i class="icon-instagram"></i></a></li>
+                            <li><a href="#"><i class="icon-pinterest"></i></a></li>
+                            <li><a href="#"><i class="icon-vimeo"></i></a></li>
+                            <li><a href="#"><i class="icon-youtube-play"></i></a></li>
+                        </ul>
+                        <p>© Citytours 2018</p>
+                    </div>
+                </div>
+            </div><!-- End row -->
+        </div><!-- End container -->
+    </footer><!-- End footer -->
+
+    <div id="toTop"></div><!-- Back to top button -->
+
+    <!-- Search Menu -->
+    <div class="search-overlay-menu">
+        <span class="search-overlay-close"><i class="icon_set_1_icon-77"></i></span>
+        <form role="search" id="searchform" method="get">
+            <input value="" name="q" type="search" placeholder="Search..." />
+            <button type="submit"><i class="icon_set_1_icon-78"></i>
+            </button>
+        </form>
+    </div><!-- End Search Menu -->
+
+    <!-- Sign In Popup -->
+    <!-- /Sign In Popup -->
+
+    <!-- Common scripts -->
+    <script src="{% static '/js/jquery-2.2.4.min.js'  %}"></script>
+    <script src="{% static '/js/common_scripts_min.js'  %}"></script>
+    <script src="{% static '/js/functions.js'  %}"></script>
+
+    <!-- Date picker -->
+    <script>$('input.date-pick').datepicker();</script>
+
+    <!-- Input quantity  -->
+    <script src="{% static '/js/input_qty.js'  %}"></script>
+
+    <!-- Autocomplete -->
+    <script>
+        function initMap() {
+            var input = document.getElementById('autocomplete');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.addListener('place_changed', function () {
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("Autocomplete's returned place contains no geometry");
+                    return;
+                }
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+            });
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"></script>
+
+</body>
+
+</html>

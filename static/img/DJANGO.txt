@@ -1,0 +1,138 @@
++++++ VIEWS +++++
+++++++++++++++++++
+------------------------
+
+**LOGIN***
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('dash')
+        else:
+            messages.success(request,"Your passWord or username is not correct !")
+            return render(request,'registration/login.html',{})
+    else:
+        return render(request,'registration/login.html',{})
+**LOGOUT***
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+
+***AFFICHER LIST***
+def listAnom(request):
+    commandes = Commandes.objects.all();
+
+    return render(request,'listAno.html',{
+        'commandes ' : commandes 
+    })
+
+****AJOUTER****
+def create(request):
+    if request.method == "GET":
+        return render(request, 'CRUD/createUser.html')
+    else:
+        nom = request.POST['nom']
+        prenom = request.POST['prenom']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        role = request.POST['role']
+
+        user = User(None, nom, prenom, username, email, password, role)
+        user.save()
+
+        return redirect('/users')
+
+*****SUPPRIMER*****
+def delete(request, id):
+
+    user = User.objects.get(pk=id).delete()
+
+    return redirect('/users')
+
+**********MODIFIER*******
+def edit(request, id):
+    id1 = id
+    if request.method == "GET":
+        user = User.objects.filter(id=id).get
+        return render(request, 'CRUD/editUser.html', {
+            'user': user
+        })
+    else:
+        nom = request.POST['nom']
+        prenom = request.POST['prenom']
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        role = request.POST['role']
+
+        user = User(id1, nom, prenom, username, email, password, role)
+        user.save()
+
+        return redirect('/users')
+
+***AFFICHER TOUT AVEC PAGINATION***
+def index(request):
+   produits = Produit.objects.all()
+   p= Paginator(Produit.objects.all(), 2)
+   page= request.GET.get('page')
+   listps = p.get_page(page)
+
+   return  render(request,'store/index.html', context={"produits": produits,
+                                                       'listps': listps})
+***recherche******
+def search_Product(request):
+    if request.method == "POST":
+        searched = request.POST['search']
+        produits = Produit.objects.filter(
+            Q(nomProduit__icontains=searched) | Q(produitRef__icontains=searched) | Q(id__icontains=searched))
+
+    return render(request, 'store/search.html', {'searched': searched, 'produits': produits})
+
+*******FILTRER PAR ******
+def commandParPersonne(request):
+    if request.method == "POST":
+        searchedC = request.POST['searchC']
+        commandes = Commande.objects.all()
+        personnes = Commande.objects.filter(personne_id=searchedC)
+
+        return render(request, 'store/commandeParPersonne.html', {'searchedC': searchedC, 'personnes': personnes,"commandes": commandes})
+
+*****GENERER FORM AVEC DJANGO (forms.py)***
+class produitF(forms.ModelForm):
+    class Meta:
+        model = Produit
+        fields = "__all__"
+
+******CREER UNE CLASS (models.ps)****
+class Personne(models.Model):
+    nom = models.CharField(max_length=128)
+    prenom = models.CharField(max_length=128)
+    email = models.EmailField(max_length = 254)
+    categorie = models.ForeignKey(Categorie, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.email
+*****EXEMPLE urls.py****
+from shoplanssari import settings
+urlpatterns = [
+    path('',index,name='index'),
+    path('commandes/',index,name='commande'),
+    path('admin/', admin.site.urls),
+    path('produit/<str:slug>/', produit_detail, name="produit"),
+    path('search/', search_Product, name="search"),
+    path('login/', include('django.contrib.auth.urls')),
+    path('formP/', prodF, name='formP'),
+    path('formCo/', CmdF, name='formCo'),
+    path('login/', login_user, name='login'),
+    path('cmdParPersonne/',commandParPersonne, name='cmdParPersonne'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
